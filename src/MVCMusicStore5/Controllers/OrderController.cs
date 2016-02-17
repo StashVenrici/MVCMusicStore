@@ -23,7 +23,7 @@ namespace MVCMusicStore5.Controllers
         {
             var model = new OrderModel();
             var repository = new AlbumRepository();
-            if (HttpContext.Session.GetString("CartItems") != null)
+            if (!String.IsNullOrEmpty(HttpContext.Session.GetString("CartItems")))
             {
                 var cartItems = GetCartItemsFromSession();
                 var orderTotal = Convert.ToDecimal(0);
@@ -60,7 +60,7 @@ namespace MVCMusicStore5.Controllers
         private List<CartItemModel> AddCartItem(CartItemModel cartItem)
         {
             List<CartItemModel> cartItems = null;
-            if (HttpContext.Session.GetString("cartItems") != null)
+            if (!String.IsNullOrEmpty(HttpContext.Session.GetString("CartItems")))
             {
                 cartItems = GetCartItemsFromSession();
             }
@@ -72,22 +72,15 @@ namespace MVCMusicStore5.Controllers
             return cartItems;
         }
 
-        private void AddCartItemsFromSession(List<CartItemModel> cartItems)
-        {
-            var prevCartItems = GetCartItemsFromSession();
-            cartItems.AddRange(prevCartItems);
-
-        }
-
         private void PutCartItemsInSession(List<CartItemModel> cartItems)
         {
             var json = SerializationLogic<List<CartItemModel>>.Serialize(cartItems);
-            HttpContext.Session.SetString("cartItems", json);
+            HttpContext.Session.SetString("CartItems", json);
         }
 
         private List<CartItemModel> GetCartItemsFromSession()
         {
-            var json = HttpContext.Session.GetString("cartItems");
+            var json = HttpContext.Session.GetString("CartItems");
             return SerializationLogic<List<CartItemModel>>.Deserialize(json);
 
         }
@@ -110,11 +103,7 @@ namespace MVCMusicStore5.Controllers
         [HttpPost]
         public ActionResult EditCartItem(CartItemModel cartItem)
         {
-            var cartItems = new List<CartItemModel> {cartItem};
-            if (HttpContext.Session.GetString("cartItems") != null)
-            {
-                AddCartItemsFromSession(cartItems);
-            }
+            var cartItems = AddCartItem(cartItem);
             PutCartItemsInSession(cartItems);
             return RedirectToAction("ViewOrder");
         }

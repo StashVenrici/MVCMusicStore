@@ -7,6 +7,7 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/bootstrap/dist/css/landing-page.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -21,7 +22,7 @@
     </environment>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top topnav">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -32,17 +33,11 @@
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">MVC Music Store 5</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="dropdown">@Html.Partial("GenreMenu")</li>
                     <li><a asp-controller="Album" asp-action="ViewAlbums">Albums</a></li>
-                    @if (User.Identity.IsAuthenticated) {
-                        <li><a asp-controller="Admin" asp-action="Admin">Admin</a></li>
-                    }
-                    <li><a asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
