@@ -1,0 +1,62 @@
+﻿@model MVCMusicStore5.Models.AlbumModels.AlbumsModel
+
+@{
+    ViewBag.Title = "Albums";
+}
+
+<h2>Albums</h2>
+
+<table id="tblAlbums" class="table">
+    <tr>
+    <th>
+        Title
+    </th>
+    <th>
+        Genre
+    </th>
+    <th>
+        Price
+    </th>
+    <th>
+        Details
+    </th>
+    </tr>
+    @foreach (var album in Model.Albums)
+    {
+        <tr>
+            <td>
+                @album.Title
+            </td>
+            <td>
+                @album.Genre.Name
+            </td>
+            <td>
+                @album.Price
+            </td>
+            <td>
+                @Html.ActionLink("Details", "ViewAlbum", "Album", new { @id = @album.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Styles{
+    <link href="~/Content/filtergrid.css" rel="stylesheet" />
+}
+
+@section scripts{
+<script src="~/Scripts/actb.js"></script>
+<script src="~/Scripts/tablefilter.js"></script>
+<script language="javascript" type="text/javascript">
+        var tableFilters = {
+            btn: true,
+            btn_reset: true,
+        col_1: "select",
+        col_3: "none"
+    }
+        setFilterGrid("tblAlbums", 0, tableFilters);
+</script>
+    
+}
+

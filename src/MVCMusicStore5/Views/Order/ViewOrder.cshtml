@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNet.Authentication.Notifications
+@model MVCMusicStore5.Models.OrderModels.OrderModel
+@{
+    ViewBag.Title = "View Order";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.CartItems != null)
+{
+    <table class="table" id="tbl">
+        <tr>
+            <th>Title</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Order Total</th>
+            <th></th>
+        </tr>
+        @foreach (var cartItem in Model.CartItems)
+        {
+            <tr>
+                <td>
+                    @cartItem.Title
+                </td>
+                <td>@cartItem.Price</td>
+                <td>
+                    @cartItem.Quantity
+                </td>
+                <td>@cartItem.ItemSubtotal</td>
+                <td>
+                    <a asp-controller="Order" asp-action="EditCartItem" asp-route-id="@cartItem.Id">Edit</a>&nbsp;
+                    <a asp-controller="Order" asp-action="DeleteCartItem" asp-route-id="@cartItem.Id">Delete</a></td>
+            </tr>
+        }
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+                <td>@Model.OrderTotal</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p>
+        No items in your cart
+    </p>
+}
+

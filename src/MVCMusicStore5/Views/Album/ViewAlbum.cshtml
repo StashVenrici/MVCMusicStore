@@ -1,0 +1,57 @@
+﻿@using System
+@using System.Collections.Generic
+@model MVCMusicStore5.Models.AlbumModels.AlbumModel
+@{
+    ViewBag.Title = "Album Details";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+
+    <img src="~/Images/placeholder.gif" />
+</div>
+
+<div>
+    <div>
+        @String.Format("Genre - {0}", @Model.Genre.Name);
+    </div>
+    <div>
+        @String.Format("Artist - {0}", @Model.Artist.Name);
+    </div>
+    <div>
+        @String.Format("Price - {0}", @Model.Price);
+    </div>
+    <div>
+        Quantity - <select asp-for="Quantity" asp-items="ViewBag.QuantityDictionary"></select>
+        <a id="AddToCart" href="#">Add To Cart</a>
+    </div>
+</div>
+<div id="ItemNumber">
+</div>
+<input type="hidden" id="Id" value="@Model.Id"/>
+
+@section scripts{
+    <script>
+        $(document).ready(function()
+        {
+            $("#AddToCart").click(function () {
+                addToCart();
+            });
+        });
+
+        function addToCart() {
+            $.ajax({
+                url: "/Order/AddToCart",
+                datatype: "json",
+                data: { Id: $("#Id").val(), quantity: $("#Quantity").val() },
+                async: false,
+                success: function (data) {
+                    $("#NumberOfItems").html("Number of Items: " + data.cartItemNumber + "&nbsp;");
+                }
+            });
+        }
+    
+    </script>
+}
+

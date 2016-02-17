@@ -1,0 +1,25 @@
+﻿@model MVCMusicStore5.Models.AlbumModels.AlbumsModel
+
+@{
+    ViewBag.Title = "Albums By Genre";
+}
+
+<h2>Albums By Genre</h2>
+
+
+@for (var i = 0; i < Model.Albums.Count - 1; i += 5)
+{
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+            <div><a href='@Url.Action("ViewAlbum", "Album", new { @id = @Model.Albums[i].Id })'><img src='@Url.Content("~/Images/placeholder.gif")' /></a></div>
+            <div></div><a href='@Url.Action("ViewAlbum", "Album", new { @id = @Model.Albums[0].Id })'>@String.Format("{0} - {1}", @Model.Albums[i].Title, @Model.Albums[i].Price)</a>
+        </div>
+        @for (int j = i + 1; j <= Math.Min(4 + i, @Model.Albums.Count - 1); j++)
+        {
+            <div class="col-md-2">
+                <div><a href='@Url.Action("ViewAlbum", "Album", new { @id = @Model.Albums[j].Id })'><img src='@Url.Content("~/Images/placeholder.gif")' /></a></div>
+                <div></div><a href='@Url.Action("ViewAlbum", "Album", new { @id = @Model.Albums[j].Id })'>@String.Format("{0} - {1}", @Model.Albums[j].Title, @Model.Albums[j].Price)</a>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,36 @@
+﻿<div style="float: left; padding-top: 20px">
+    <div style="float: left">
+        <a href="@Url.Action("Index", "Home")"><img src='@Url.Content("~/images/logo.png")' /></a>
+    </div>
+</div>
+<div style="float: right">
+    <div style="float: left; padding: 20px">
+        <image src='@Url.Content("~/images/shoping_cart.png")' style="height:20px" />
+    </div>
+    <div style="padding: 15px">
+        @{
+            int cartItemCount = 0;
+            //if (HttpContext.Session.GetString("CartItems") != null)
+            //{
+            //    var cartItems =
+            //        (List<CartItemModel>)
+            //            BusinessLogicLibrary.SerializationLogic<List<CartItem>>.Deserialize(Context.Session["CartItems"]);
+            //    foreach (var c in cartItems)
+            //    {
+            //        cartItemCount += c.Quantity;
+            //    }
+            //}
+        }
+        <div>
+            <div id="NumberOfItems" style="float:left">
+                @String.Format("Number of Items: {0}", @cartItemCount)&nbsp;
+            </div>
+            <div>
+                <a asp-controller="Order" asp-action="ViewOrder">View Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

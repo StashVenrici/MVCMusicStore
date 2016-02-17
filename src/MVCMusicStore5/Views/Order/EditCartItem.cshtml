@@ -1,0 +1,28 @@
+﻿@model MVCMusicStore5.Models.OrderModels.CartItem
+
+@{
+    ViewBag.Title = "Edit Cart Item";
+}
+
+<h2>@String.Format("Edit - {0}", @Model.Title)</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Title
+            </td>
+            <td>@Model.Price</td>
+            <td>
+                <select asp-for="Quantity" asp-items="ViewBag.QuantityDictionary"></select>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Submit" class="btn btn-default" />
+}
