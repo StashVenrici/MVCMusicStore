@@ -20,8 +20,7 @@ namespace MVCMusicStore5.Entities
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=tcp:glqr7ajlfz.database.windows.net,1433;Database=SchroederConsultingDemo;User ID=carolynlschroeder@glqr7ajlfz;Password=Overland*01;Trusted_Connection=False;Encrypt=True;;MultipleActiveResultSets=true");
-                //@"Server=CAROLYN-PC\SQLSERVEREXPRESS;Database=MVCMusicStore;Trusted_Connection=True;MultipleActiveResultSets=true");
+                @"Server=LAPTOP-6RLIUI13\SQLSERVEREXPRESS;Database=MVCMusicStore;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
 
